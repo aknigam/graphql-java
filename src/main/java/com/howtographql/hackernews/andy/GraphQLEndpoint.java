@@ -24,7 +24,13 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import javax.servlet.annotation.WebServlet;
 import javax.sql.DataSource;
 
+/*
 
+Refer:
+    https://github.com/howtographql/graphql-java
+    https://www.howtographql.com/graphql-java/0-introduction/
+
+ */
 @WebServlet(urlPatterns = "/graphql")
 public class GraphQLEndpoint extends SimpleGraphQLServlet {
 

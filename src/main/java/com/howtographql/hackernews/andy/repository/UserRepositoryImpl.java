@@ -60,5 +60,9 @@ public class UserRepositoryImpl implements UserRepository {
   public List<User> getUsersByLink(Integer linkId) {
     UserMapper userMapper = sessionManager.getMapper(UserMapper.class);
     return userMapper.getUsersByLink(linkId);
+//    if(users!=null && users.size()>0) {
+//      return users.get(0);
+//    }
+//    return null;
   }
 }

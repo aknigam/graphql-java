@@ -44,14 +44,14 @@ public interface LinkMapper {
           @Result(column = "id", property = "id"),
           @Result(column = "url", property = "url"),
           @Result(column = "description", property = "description"),
-//          @Result(
-//                  column = "id",
-//                  property = "user",
-//                  javaType = List.class,
-//                  many =
-//                  @Many(
-//                          select =
-//                                  "com.howtographql.hackernews.andy.mapper.UserMapper.getUsersByLink"))
+          @Result(
+                  column = "id",
+                  property = "user",
+                  javaType = List.class,
+                  many =
+                  @Many(
+                          select =
+                                  "com.howtographql.hackernews.andy.mapper.UserMapper.getUsersByLink"))
   })
   List<Link> getAllLinks();
 

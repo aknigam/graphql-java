@@ -23,7 +23,11 @@ public class LinkRepositoryImpl implements LinkRepository {
 
     }
 
-
+    /**
+     * even if the users are returned from this query then also the resolver will be invoked if it is configured
+     * if resolver is not configured then what ever is returned from here will be returned as is
+     * @return
+     */
     public List<Link> getAllLinks() {
         try {
             LinkMapper mapper = sqlSessionFactory.getMapper(LinkMapper.class);
@@ -47,12 +51,11 @@ public class LinkRepositoryImpl implements LinkRepository {
 
         linkMapper.createLink(link);
 
-        if (link.getUser() != null) {
-            for (User user : link.getUser()) {
-//            user.setUserLinkId(link.getId());
-                createUser(user);
-            }
-        }
+//        if (link.getUser() != null) {
+//            for (User user : link.getUser()) {
+//                createUser(user);
+//            }
+//        }
     }
 
     private void createUser(User user) {
@@ -79,25 +82,25 @@ public class LinkRepositoryImpl implements LinkRepository {
             throw new RuntimeException(String.format("Link with id {} does not exists", link.getId()));
         }
         linkMapper.updateLink(link);
-        if (link.getUser() != null) {
-            if (existingLink.getUser() != null) {
-                existingLink.getUser().removeAll(link.getUser());
-            }
-            for (User user : link.getUser()) {
-                if (user.getId() != null) {
-                    updateUser(user);
-                } else {
-//                    user.setUserLinkId(link.getId());
-                    createUser(user);
-                }
-            }
-        }
-        if (existingLink.getUser() != null) {
-            for (User user : existingLink.getUser()) {
-//                linkMapper.unLinkLinkUser(linkId, user.getId());
-                deleteUser(user.getId());
-            }
-        }
+//        if (link.getUser() != null) {
+//            if (existingLink.getUser() != null) {
+//                existingLink.getUser().removeAll(link.getUser());
+//            }
+//            for (User user : link.getUser()) {
+//                if (user.getId() != null) {
+//                    updateUser(user);
+//                } else {
+////                    user.setUserLinkId(link.getId());
+//                    createUser(user);
+//                }
+//            }
+//        }
+//        if (existingLink.getUser() != null) {
+//            for (User user : existingLink.getUser()) {
+////                linkMapper.unLinkLinkUser(linkId, user.getId());
+//                deleteUser(user.getId());
+//            }
+//        }
     }
     private void deleteUser(java.lang.Integer userId) {
         UserMapper userMapper = sqlSessionFactory.getMapper(UserMapper.class);
@@ -125,13 +128,13 @@ public class LinkRepositoryImpl implements LinkRepository {
         if (link == null) {
             return;
         }
-        List<User> users = link.getUser();
-        if (users != null) {
-            for (User user : users) {
-//                linkMapper.unLinkLinkUser(linkId, user.getId());
-                deleteUser(user.getId());
-            }
-        }
-        linkMapper.deleteLink(linkId);
+//        List<User> users = link.getUser();
+//        if (users != null) {
+//            for (User user : users) {
+////                linkMapper.unLinkLinkUser(linkId, user.getId());
+//                deleteUser(user.getId());
+//            }
+//        }
+//        linkMapper.deleteLink(linkId);
     }
 }

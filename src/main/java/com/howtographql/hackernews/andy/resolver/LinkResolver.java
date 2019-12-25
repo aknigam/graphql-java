@@ -14,7 +14,15 @@ public class LinkResolver implements GraphQLResolver<Link> {
         this.userRepository = userRepository;
     }
 
-    List<User> user(Link link){
+    /*
+    name of this method can be getUser or user
+     */
+    public List<User> user(Link link){
         return userRepository.getUsersByLink(link.getId());
+    }
+    // not a usual or a normal approach but the resolver can be declared even for simple properties
+    // as shown below
+    public String url(Link link){
+        return "www.google.com";
     }
 }
